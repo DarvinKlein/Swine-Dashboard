@@ -53,8 +53,8 @@ async function saveAndDownload() {
       swine_name: swineName.value.trim(),
       breeding_date: breedDateInput.value
     })
-    downloadSwinePdf(res.data)
-    savedMessage.value = 'Saved to swine lists and downloaded as PDF.'
+    // downloadSwinePdf(res.data)
+    // savedMessage.value = 'Saved to swine lists and downloaded as PDF.'
   } catch (err) {
     saveError.value = 'Could not save the record. Is the API running?'
   } finally {
@@ -92,7 +92,7 @@ async function saveAndDownload() {
 
     <section class="input-row">
       <button type="button" class="primary" :disabled="!isFormComplete || saving" @click="saveAndDownload">
-        {{ saving ? 'Saving...' : 'Save as PDF' }}
+        {{ saving ? 'Saving...' : 'Save' }}
       </button>
       <button type="button" @click="clearAll">Clear</button>
     </section>
