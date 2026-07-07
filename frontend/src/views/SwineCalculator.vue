@@ -54,7 +54,7 @@ async function saveAndDownload() {
       breeding_date: breedDateInput.value
     })
     // downloadSwinePdf(res.data)
-    // savedMessage.value = 'Saved to swine lists and downloaded as PDF.'
+    savedMessage.value = 'Saved to swine lists and downloaded as PDF.'
   } catch (err) {
     saveError.value = 'Could not save the record. Is the API running?'
   } finally {
