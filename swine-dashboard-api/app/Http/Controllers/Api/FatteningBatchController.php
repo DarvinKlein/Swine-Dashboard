@@ -18,6 +18,11 @@ class FatteningBatchController extends Controller
                     'id' => $batch->id,
                     'number_of_heads' => $batch->number_of_heads,
                     'total_cost' => $batch->total_cost,
+                    'feeds' => $batch->feeds->map(fn ($feed) => [
+                        'id' => $feed->id,
+                        'feed_name' => $feed->feed_name,
+                        'amount' => $feed->amount,
+                    ]),
                     'created_at' => $batch->created_at,
                 ];
             });
@@ -35,6 +40,7 @@ class FatteningBatchController extends Controller
             'id' => $batch->id,
             'number_of_heads' => $batch->number_of_heads,
             'total_cost' => 0,
+            'feeds' => [],
             'created_at' => $batch->created_at,
         ], 201);
     }

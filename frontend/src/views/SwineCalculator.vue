@@ -55,6 +55,8 @@ async function saveAndDownload() {
     })
     // downloadSwinePdf(res.data)
     savedMessage.value = 'Saved to swine lists and downloaded as PDF.'
+    swineName.value = ''
+    breedDateInput.value = ''
   } catch (err) {
     saveError.value = 'Could not save the record. Is the API running?'
   } finally {
