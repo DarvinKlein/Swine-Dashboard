@@ -12,6 +12,7 @@ class FatteningFeed extends Model
 
     protected $fillable = [
         'fattening_batch_id',
+        'feed_name',
         'amount',
     ];
 
