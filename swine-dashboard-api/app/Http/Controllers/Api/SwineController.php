@@ -34,4 +34,11 @@ class SwineController extends Controller
 
         return response()->json($swine, 201);
     }
+
+    public function destroy(Swine $swine)
+    {
+        $swine->delete();
+
+        return response()->json(null, 204);
+    }
 }
