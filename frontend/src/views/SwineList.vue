@@ -7,6 +7,7 @@ import { fmtShort } from '../utils/feeding'
 const swines = ref([])
 const loading = ref(true)
 const loadError = ref('')
+const deletingId = ref(null)
 
 onMounted(async () => {
   try {
@@ -21,6 +22,21 @@ onMounted(async () => {
 
 function handleSavePdf(swine) {
   downloadSwinePdf(swine)
+}
+
+async function handleDelete(swine) {
+  const confirmed = window.confirm(`Delete the record for "${swine.swine_name}"? This cannot be undone.`)
+  if (!confirmed) return
+
+  deletingId.value = swine.id
+  try {
+    await client.delete(`/swines/${swine.id}`)
+    swines.value = swines.value.filter((s) => s.id !== swine.id)
+  } catch (err) {
+    window.alert('Could not delete this record. Please try again.')
+  } finally {
+    deletingId.value = null
+  }
 }
 </script>
 
@@ -47,6 +63,7 @@ function handleSavePdf(swine) {
           <th>Iron date</th>
           <th>Labor date</th>
           <th>Save as PDF</th>
+          <th>Delete</th>
         </tr>
       </thead>
       <tbody>
@@ -57,8 +74,30 @@ function handleSavePdf(swine) {
           <td>{{ fmtShort(swine.iron_date) }}</td>
           <td>{{ fmtShort(swine.labor_date_start) }} - {{ fmtShort(swine.labor_date_end) }}</td>
           <td><button type="button" @click="handleSavePdf(swine)">Save as PDF</button></td>
+          <td>
+            <button
+              type="button"
+              class="danger"
+              :disabled="deletingId === swine.id"
+              @click="handleDelete(swine)"
+            >
+              {{ deletingId === swine.id ? 'Deleting...' : 'Delete' }}
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
   </div>
 </template>
+
+<style scoped>
+button.danger {
+  border-color: var(--barn);
+  color: var(--barn);
+}
+
+button.danger:hover {
+  background: var(--barn);
+  color: var(--paper);
+}
+</style>
