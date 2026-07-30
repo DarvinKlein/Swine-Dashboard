@@ -73,6 +73,8 @@ function saveAsPdf() {
     labor_date_start: laborStart.value,
     labor_date_end: laborEnd.value
   })
+  swineName.value = ''
+  breedDateInput.value = ''
 }
 </script>
 
