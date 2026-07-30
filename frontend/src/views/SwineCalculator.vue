@@ -53,8 +53,7 @@ async function saveAndDownload() {
       swine_name: swineName.value.trim(),
       breeding_date: breedDateInput.value
     })
-    downloadSwinePdf(res.data)
-    savedMessage.value = 'Saved to swine lists and downloaded as PDF.'
+    savedMessage.value = 'Saved to swine lists.'
     swineName.value = ''
     breedDateInput.value = ''
   } catch (err) {
@@ -62,6 +61,18 @@ async function saveAndDownload() {
   } finally {
     saving.value = false
   }
+}
+
+function saveAsPdf() {
+  if (!isFormComplete.value) return
+  downloadSwinePdf({
+    swine_name: swineName.value.trim(),
+    breeding_date: breedDateInput.value,
+    pregnant_date: pregnantCheckDate.value,
+    iron_date: ironDate.value,
+    labor_date_start: laborStart.value,
+    labor_date_end: laborEnd.value
+  })
 }
 </script>
 
@@ -95,6 +106,9 @@ async function saveAndDownload() {
     <section class="input-row">
       <button type="button" class="primary" :disabled="!isFormComplete || saving" @click="saveAndDownload">
         {{ saving ? 'Saving...' : 'Save' }}
+      </button>
+      <button type="button" class="primary" :disabled="!isFormComplete || saving" @click="saveAsPdf">
+        {{ saving ? 'Saving...' : 'Save as PDF' }}
       </button>
       <button type="button" @click="clearAll">Clear</button>
     </section>
