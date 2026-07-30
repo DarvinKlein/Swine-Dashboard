@@ -11,5 +11,3 @@ Route::post('/swines', [SwineController::class, 'store']);
 Route::get('/fattening-batches', [FatteningBatchController::class, 'index']);
 Route::post('/fattening-batches', [FatteningBatchController::class, 'store']);
 Route::post('/fattening-batches/{batch}/feeds', [FatteningFeedController::class, 'store']);
-Route::delete('/swines/{swine}', [SwineController::class, 'destroy']);
-Route::put('/fattening-feeds/{feed}', [FatteningFeedController::class, 'update']);

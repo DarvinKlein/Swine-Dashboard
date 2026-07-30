@@ -53,7 +53,7 @@ async function saveAndDownload() {
       swine_name: swineName.value.trim(),
       breeding_date: breedDateInput.value
     })
-    // downloadSwinePdf(res.data)
+    downloadSwinePdf(res.data)
     savedMessage.value = 'Saved to swine lists and downloaded as PDF.'
     swineName.value = ''
     breedDateInput.value = ''
