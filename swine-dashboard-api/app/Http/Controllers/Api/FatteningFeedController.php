@@ -25,4 +25,9 @@ class FatteningFeedController extends Controller
             'created_at' => $batch->created_at,
         ], 201);
     }
+
+    public function index(FatteningBatch $batch)
+    {
+        return response()->json($batch->feeds);
+    }
 }
